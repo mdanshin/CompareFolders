@@ -16,11 +16,20 @@ namespace CompareFolders
 
         static int _fileCount1;
         static int _fileCount2;
-        static bool _quite = false;
-        static bool _print = false;
+        static bool _quite;
+        static bool _print;
 
-        static List<string> _skupedFiles = new List<string>();
-        static Hashtable tableOfFiles = new Hashtable();
+        static List<string> _skipedFiles;
+        static Hashtable tableOfFiles;
+
+        CompareFolders()
+        {
+            bool _quite = false;
+            bool _print = false;
+
+            List<string> _skupedFiles = new List<string>();
+            Hashtable tableOfFiles = new Hashtable();
+        }
         #endregion
 
         static void Main(string[] args)
@@ -67,7 +76,7 @@ namespace CompareFolders
                     }
                     else
                     {
-                        _skupedFiles.Add(file);
+                        _skipedFiles.Add(file);
                     }
                 }
 
@@ -94,7 +103,7 @@ namespace CompareFolders
                 Console.WriteLine("Найдено уникальных файлов {0}\n", tableOfFiles.Count);
                 Console.WriteLine("Время выполнения (чч:мм:сс:мс): {0}:{1}:{2}:{3}\n", watch.Elapsed.Hours, watch.Elapsed.Minutes, watch.Elapsed.Seconds, watch.Elapsed.Milliseconds);
                 Console.WriteLine("Пропущены следующие файлы:");
-                Console.WriteLine(_skupedFiles);
+                Console.WriteLine(_skipedFiles);
 
                 if (tableOfFiles.Count != 0 && _quite && _print)
                 {
@@ -154,7 +163,7 @@ namespace CompareFolders
                 }
                 catch (UnauthorizedAccessException)
                 {
-                    _skupedFiles.Add(path);
+                    _skipedFiles.Add(path);
                 }
                 catch (Exception ex)
                 {
@@ -197,7 +206,7 @@ namespace CompareFolders
             catch(Exception ex) when (ex is IOException || ex is UnauthorizedAccessException)
             {
                 //TODO: С точки зрения ООП неправильно размещать в этом блоке логику. Переделать.
-                _skupedFiles.Add(filename);
+                _skipedFiles.Add(filename);
                 //TODO: Тут есть проблема. Если в дальнейшем встретится несколько значений null, то они будут восприняты как одинаковые.
                 //Возможно стоит организовать какой-то счетчик
                 return null;
