@@ -5,12 +5,6 @@
 программу.  После  этого  вычисляется  хэш функция  каждого файла.  В завершении  
 Вы получаете список уникальных, не повторяющихся файлов.
 
-<h2>АВТОР:</h2>
-Даньшин Михаил<br>
-Блог – http://danshin.ms<br>
-Facebook - https://www.facebook.com/Danshin.ms<br>
-E-Mail: - mdanshin@gmail.com<br>
-
 <h2>СПСОК ИЗМЕНЕНИЙ:</h2>
 14.11.2015 - Версия 1.0.1.16 Release - Первая стабильная версия программы<br>
 11.01.2016 - Версия 1.0.1.17 Release - Исправление ошибок
@@ -75,3 +69,9 @@ cannot access the file".
 Например "c:\Mikhail Danshin\". 
 Так  же  программа  не  воспринимает  если  встречает путь заключенный в кавычки 
 оканчивающийся на слэш. Например "c:\Mikhail\".
+
+<h2>АВТОР:</h2>
+Даньшин Михаил<br>
+Блог – http://danshin.ms<br>
+Facebook - https://www.facebook.com/Danshin.ms<br>
+E-Mail: - mdanshin@gmail.com<br>
