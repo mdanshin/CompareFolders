@@ -96,7 +96,7 @@ namespace CompareFolders
                     }
                     else
                     {
-                        _skupedFiles.Add(file);
+                        _skipedFiles.Add(file);
                     }
                 }
 
@@ -108,10 +108,10 @@ namespace CompareFolders
                 Console.WriteLine("Всего обработано {0} файлов\n", (_fileCount1 + _fileCount2).ToString());
                 Console.WriteLine("Найдено уникальных файлов {0}\n", tableOfFiles.Count);
                 Console.WriteLine("Время выполнения (чч:мм:сс:мс): {0}:{1}:{2}:{3}\n", watch.Elapsed.Hours, watch.Elapsed.Minutes, watch.Elapsed.Seconds, watch.Elapsed.Milliseconds);
-                Console.WriteLine("Пропущено {0} файл(ов):", _skupedFiles.Count);
-                for (int i = 0; i < _skupedFiles.Count; i++)
+                Console.WriteLine("Пропущено {0} файл(ов):", _skipedFiles.Count);
+                for (int i = 0; i < _skipedFiles.Count; i++)
                 {
-                    Console.WriteLine(_skupedFiles[i]);
+                    Console.WriteLine(_skipedFiles[i]);
                 }
                 
 
