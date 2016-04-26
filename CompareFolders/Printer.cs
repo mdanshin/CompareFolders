@@ -3,8 +3,17 @@ using System.Diagnostics;
 
 namespace CompareFolders
 {
+    /// <summary>
+    /// Класс вывода на консоль текстовых сообщений.
+    /// </summary>
     internal static class Printer
     {
+        /// <summary>
+        /// Выводит на консоль информацию о ходе обработки файлов.
+        /// </summary>
+        /// <param name="fileCount1">Кол-во обработанных файлов в первой папке</param>
+        /// <param name="fileCount2">Кол-во обработанных файлов во второй папке</param>
+        /// <param name="currentFile">Текущий обрабатываемый файл</param>
         public static void PrintProgress(string fileCount1, string fileCount2, string currentFile)
         {
             Console.CursorTop = 3;
@@ -16,17 +25,26 @@ namespace CompareFolders
             Console.WriteLine($"Текущий файл: {currentFile}\n");
 
         }
+        /// <summary>
+        /// Вывод на консоль стартовой информации и номера версии сборки
+        /// </summary>
         public static void PrintHeader()
         {
             Console.WriteLine("Сравнение папок [версия " + GetAssemblyVersion() + "]");
             Console.WriteLine("Автор: Михаил Даньшин, (с) 2015");
         }
-        public static void PrintErrorr()
+        /// <summary>
+        /// Вывод на консоль сообщения об ошибке указания параметров
+        /// </summary>
+        public static void PrintParamErrorr()
         {
             Console.WriteLine("\nОШИБКА: Аргументы заданы неверно\n");
             Console.WriteLine("Пример использования: CompareFolders.exe c:\\folder1 c:\\folder2 [/quite] [/print]\n");
             Console.WriteLine("Для вывода справки используйте ключ /?");
         }
+        /// <summary>
+        /// Вывод на консоль справочной информации
+        /// </summary>
         public static void PrintHelp()
         {
             Console.WriteLine("\nCOMPAREFOLDERS c:\\folder1 c:\\folder2 [/quite] [/print]\n");
@@ -39,6 +57,10 @@ namespace CompareFolders
             Console.WriteLine(">>Функция копирования уникальных файлов в третью папку");
 
         }
+        /// <summary>
+        /// Получение текущей версии сборки
+        /// </summary>
+        /// <returns>Возвращает текущую версию сборки</returns>
         private static string GetAssemblyVersion()
         {
             var assembly = System.Reflection.Assembly.GetExecutingAssembly();
@@ -47,6 +69,9 @@ namespace CompareFolders
             return version;
         }
 
+        /// <summary>
+        /// Очищает консоль ниже положения курсора.
+        /// </summary>
         private static void ClearCurrentConsoleLine()
         {
             var currentLineCursor = Console.CursorTop;

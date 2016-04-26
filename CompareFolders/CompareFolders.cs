@@ -39,7 +39,7 @@ namespace CompareFolders
                 }
                 else if (args.Length >= 3 && args[2] != null && args[2] != "/quite")
                 {
-                    Printer.PrintErrorr();
+                    Printer.PrintParamErrorr();
                     Environment.Exit(0);
                 }
                 if (args.Length >= 4 && args[3] != null && args[3] == "/print")
@@ -48,7 +48,7 @@ namespace CompareFolders
                 }
                 else if (args.Length >= 4 && args[3] != null && args[3] != "/print")
                 {
-                    Printer.PrintErrorr();
+                    Printer.PrintParamErrorr();
                     Environment.Exit(0);
                 }
 
@@ -140,7 +140,7 @@ namespace CompareFolders
                 }
                 else
                 {
-                    Printer.PrintErrorr();
+                    Printer.PrintParamErrorr();
                 }
             }
 
