@@ -28,9 +28,7 @@ namespace CompareFolders
 
         private static void Main(string[] args)
         {
-            Console.Title = Title;
-            Console.Clear();
-            Printer.PrintHeader();
+            ConsoleReady();
 
             if (args.Length >= 2 && args[0] != "/?")
             {
@@ -98,7 +96,7 @@ namespace CompareFolders
 
                 #region Result
                 Console.CursorLeft = 0;
-                Console.WriteLine($"Всего обработано {(FileCount1 + FileCount2).ToString()} файлов\n");
+                Console.WriteLine($"Всего обработано {FileCount1 + FileCount2} файлов\n");
                 Console.WriteLine($"Найдено уникальных файлов {TableOfFiles.Count}\n");
                 Console.WriteLine(
                     $"Время выполнения (чч:мм:сс:мс): {watch.Elapsed.Hours}:{watch.Elapsed.Minutes}:{watch.Elapsed.Seconds}:{watch.Elapsed.Milliseconds}\n");
@@ -120,18 +118,18 @@ namespace CompareFolders
                 #endregion
 
                 #region Print
-                if (TableOfFiles.Count != 0 && !Quite)
+
+                if (TableOfFiles.Count == 0 || Quite) return;
                 {
                     Console.WriteLine("Вывести список уникальных файлов? (y/N)");
-                    if (Console.ReadKey(true).Key.ToString() == "Y")
+                    if (Console.ReadKey(true).Key.ToString() != "Y") return;
+                    //Вывод на экран получившегося уникального списка значений
+                    foreach (DictionaryEntry entry in TableOfFiles)
                     {
-                        //Вывод на экран получившегося уникального списка значений
-                        foreach (DictionaryEntry entry in TableOfFiles)
-                        {
-                            Console.WriteLine("{0}", entry.Key);
-                        }
+                        Console.WriteLine($"{entry.Key}");
                     }
                 }
+
                 #endregion
             }
             else
@@ -148,6 +146,13 @@ namespace CompareFolders
 
         }
 
+        private static void ConsoleReady()
+        {
+            Console.Title = Title;
+            Console.Clear();
+            Printer.PrintHeader();
+        }
+
         private static IEnumerable<string> GetFiles(string path)
         {
             var queue = new Queue<string>();
@@ -159,7 +164,7 @@ namespace CompareFolders
 
                 try
                 {
-                    foreach (string subDir in Directory.GetDirectories(path))
+                    foreach (var subDir in Directory.GetDirectories(path))
                     {
                         queue.Enqueue(subDir);
                     }
@@ -195,6 +200,7 @@ namespace CompareFolders
         }
         //Нужно следить за тем, чтобы эта функция вызывалась не более одного раза.
         //Это влияет на производительность.
+        //TODO: Возможно стоит организовать SingleTone?
         private static string GetFileHash(string filename)
         {
             try
