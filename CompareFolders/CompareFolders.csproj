@@ -44,7 +44,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CompareFolders.cs" />
-    <Compile Include="Log.cs" />
+    <Compile Include="FileEntity.cs" />
+    <Compile Include="FilesTables.cs" />
+    <Compile Include="ILog.cs" />
     <Compile Include="Printer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Express 14 for Windows Desktop
-VisualStudioVersion = 14.0.23107.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CompareFolders", "CompareFolders\CompareFolders.csproj", "{256E2724-4E99-4246-BD1E-CFC2162E52DC}"
 EndProject
@@ -18,14 +18,5 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 2
-		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = https://mdanshin.visualstudio.com/defaultcollection
-		SccLocalPath0 = .
-		SccProjectUniqueName1 = CompareFolders\\CompareFolders.csproj
-		SccProjectName1 = CompareFolders
-		SccLocalPath1 = CompareFolders
 	EndGlobalSection
 EndGlobal
