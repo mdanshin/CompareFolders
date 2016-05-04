@@ -10,9 +10,9 @@ using System.Threading.Tasks;
 
 namespace CompareFolders
 {
-    class FilesTables
+    public class FilesTables
     {
-        private string Path { get; set; }
+        private string Path { get; }
         private List<FileEntity> FilesHashList { get; set; }
         private List<FileEntity> FilesSkipedList { get; set; }
 
@@ -21,7 +21,7 @@ namespace CompareFolders
             Path = path;
         }
 
-        public void CreateTable()
+        public void Create()
         {
             var file = new FileEntity();
 
