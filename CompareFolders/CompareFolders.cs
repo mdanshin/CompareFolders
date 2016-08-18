@@ -5,51 +5,50 @@ using System.Security.Cryptography;
 using System.Collections;
 using System.Diagnostics;
 
-//TODO: Переделать все. Ввести классы, сделать нормальные объекты. Все print-ы убрать в отдельный, скорее всего статический, класс.
+//TODO: Ввести классы, сделать нормальные объекты.
 namespace CompareFolders
 {
     public static class CompareFolders
     {
         #region Declaring variable
-
         private const string Title = "Сравнение папок";
         private const int MinFileSize = 1; //Size in bytes
         private const long MaxFileSize = 104857600; //Size in bytes
 
-        private static int _fileCount1;
-        private static int _fileCount2;
-        private static bool _quite;
-        private static bool _print;
+        private static Hashtable TableOfFiles { get; } = new Hashtable();
+        private static List<string> SkipedFiles { get; } = new List<string>();
 
-        private static readonly List<string> SkipedFiles = new List<string>();
-        private static readonly Hashtable TableOfFiles = new Hashtable();
+        private static int FileCount1 { get; set; }
+        private static int FileCount2 { get; set; }
+
+        private static bool Quite { get; set; }
+        private static bool Print { get; set; }
+
         #endregion
 
         private static void Main(string[] args)
         {
-            Console.Title = Title;
-            Console.Clear();
-            Printer.PrintHeader();
+            ConsoleReady();
 
             if (args.Length >= 2 && args[0] != "/?")
             {
                 #region Start
                 if (args.Length >= 3 && args[2] != null && args[2] == "/quite")
                 {
-                    _quite = true;
+                    Quite = true;
                 }
                 else if (args.Length >= 3 && args[2] != null && args[2] != "/quite")
                 {
-                    Printer.PrintErrorr();
+                    Printer.PrintParamErrorr();
                     Environment.Exit(0);
                 }
                 if (args.Length >= 4 && args[3] != null && args[3] == "/print")
                 {
-                    _print = true;
+                    Print = true;
                 }
                 else if (args.Length >= 4 && args[3] != null && args[3] != "/print")
                 {
-                    Printer.PrintErrorr();
+                    Printer.PrintParamErrorr();
                     Environment.Exit(0);
                 }
 
@@ -64,9 +63,9 @@ namespace CompareFolders
                     if (fileSize < MaxFileSize & fileSize >= MinFileSize) //TODO:Подумать как оптимизировать, чтобы не делать двойную проверку
                     {
                         //TODO: Дублирование кода!
-                        _fileCount1++;
+                        FileCount1++;
                         FillFileTabe(file);
-                        Printer.PrintProgress(_fileCount1.ToString(), _fileCount2.ToString(), file);
+                        Printer.PrintProgress(FileCount1.ToString(), FileCount2.ToString(), file);
                     }
                     else
                     {
@@ -82,9 +81,9 @@ namespace CompareFolders
                     if (fileSize < MaxFileSize & fileSize >= MinFileSize) //TODO:Подумать как оптимизировать, чтобы не делать двойную проверку
                     {
                         //TODO: Дублирование кода!
-                        _fileCount2++;
+                        FileCount2++;
                         FillFileTabe(file);
-                        Printer.PrintProgress(_fileCount1.ToString(), _fileCount2.ToString(), file);
+                        Printer.PrintProgress(FileCount1.ToString(), FileCount2.ToString(), file);
                     }
                     else
                     {
@@ -97,7 +96,7 @@ namespace CompareFolders
 
                 #region Result
                 Console.CursorLeft = 0;
-                Console.WriteLine($"Всего обработано {(_fileCount1 + _fileCount2).ToString()} файлов\n");
+                Console.WriteLine($"Всего обработано {FileCount1 + FileCount2} файлов\n");
                 Console.WriteLine($"Найдено уникальных файлов {TableOfFiles.Count}\n");
                 Console.WriteLine(
                     $"Время выполнения (чч:мм:сс:мс): {watch.Elapsed.Hours}:{watch.Elapsed.Minutes}:{watch.Elapsed.Seconds}:{watch.Elapsed.Milliseconds}\n");
@@ -108,7 +107,7 @@ namespace CompareFolders
                 }
 
 
-                if (TableOfFiles.Count != 0 && _quite && _print)
+                if (TableOfFiles.Count != 0 && Quite && Print)
                 {
                     //Вывод на экран получившегося уникального списка значений
                     foreach (DictionaryEntry entry in TableOfFiles)
@@ -119,18 +118,18 @@ namespace CompareFolders
                 #endregion
 
                 #region Print
-                if (TableOfFiles.Count != 0 && !_quite)
+
+                if (TableOfFiles.Count == 0 || Quite) return;
                 {
                     Console.WriteLine("Вывести список уникальных файлов? (y/N)");
-                    if (Console.ReadKey(true).Key.ToString() == "Y")
+                    if (Console.ReadKey(true).Key.ToString() != "Y") return;
+                    //Вывод на экран получившегося уникального списка значений
+                    foreach (DictionaryEntry entry in TableOfFiles)
                     {
-                        //Вывод на экран получившегося уникального списка значений
-                        foreach (DictionaryEntry entry in TableOfFiles)
-                        {
-                            Console.WriteLine("{0}", entry.Key);
-                        }
+                        Console.WriteLine($"{entry.Key}");
                     }
                 }
+
                 #endregion
             }
             else
@@ -141,10 +140,17 @@ namespace CompareFolders
                 }
                 else
                 {
-                    Printer.PrintErrorr();
+                    Printer.PrintParamErrorr();
                 }
             }
 
+        }
+
+        private static void ConsoleReady()
+        {
+            Console.Title = Title;
+            Console.Clear();
+            Printer.PrintHeader();
         }
 
         private static IEnumerable<string> GetFiles(string path)
@@ -158,7 +164,7 @@ namespace CompareFolders
 
                 try
                 {
-                    foreach (string subDir in Directory.GetDirectories(path))
+                    foreach (var subDir in Directory.GetDirectories(path))
                     {
                         queue.Enqueue(subDir);
                     }
@@ -194,6 +200,7 @@ namespace CompareFolders
         }
         //Нужно следить за тем, чтобы эта функция вызывалась не более одного раза.
         //Это влияет на производительность.
+        //TODO: Возможно стоит организовать SingleTone?
         private static string GetFileHash(string filename)
         {
             try

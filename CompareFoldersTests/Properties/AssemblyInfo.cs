@@ -1,16 +1,17 @@
 ﻿using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Compare Folders")]
-[assembly: AssemblyDescription("Compare two folders and get unique files")]
+[assembly: AssemblyTitle("CompareFoldersTests")]
+[assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("danshin.ms")]
-[assembly: AssemblyProduct("Compare Folders")]
-[assembly: AssemblyCopyright("Copyright © 2015, Mikhail Danshin")]
-[assembly: AssemblyTrademark("danshin.ms")]
+[assembly: AssemblyCompany("")]
+[assembly: AssemblyProduct("CompareFoldersTests")]
+[assembly: AssemblyCopyright("Copyright ©  2016")]
+[assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
 // Setting ComVisible to false makes the types in this assembly not visible 
@@ -19,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("256e2724-4e99-4246-bd1e-cfc2162e52dc")]
+[assembly: Guid("454f065d-c0d9-417b-816a-3516f6d4039e")]
 
 // Version information for an assembly consists of the following four values:
 //
@@ -31,5 +32,5 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.0.1.18")]
-[assembly: AssemblyFileVersion("1.0.1.18")]
+[assembly: AssemblyVersion("1.0.0.0")]
+[assembly: AssemblyFileVersion("1.0.0.0")]
