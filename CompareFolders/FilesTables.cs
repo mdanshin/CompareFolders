@@ -23,9 +23,23 @@ namespace CompareFolders
 
         public void Create()
         {
-            var file = new FileEntity();
+            var files = Directory.GetFiles(Path);
+        }
 
-            FilesHashList.Add(file);
+        public List<FileEntity> GetFilesHashList(string path)
+        {
+            FillTables(path);
+            return FilesHashList;
+        }
+
+        public List<FileEntity> GetFilesSkipedList(string path)
+        {
+            return FilesHashList;
+        }
+
+        private void FillTables(string path)
+        {
+
         }
 
         private string GetFileHash(string path)
