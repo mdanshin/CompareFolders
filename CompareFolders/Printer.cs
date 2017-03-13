@@ -25,6 +25,7 @@ namespace CompareFolders
             Console.WriteLine($"Текущий файл: {currentFile}\n");
 
         }
+
         /// <summary>
         /// Вывод на консоль стартовой информации и номера версии сборки
         /// </summary>
@@ -33,6 +34,7 @@ namespace CompareFolders
             Console.WriteLine("Сравнение папок [версия " + GetAssemblyVersion() + "]");
             Console.WriteLine("Автор: Михаил Даньшин, (с) 2015");
         }
+        
         /// <summary>
         /// Вывод на консоль сообщения об ошибке указания параметров
         /// </summary>
@@ -42,6 +44,7 @@ namespace CompareFolders
             Console.WriteLine("Пример использования: CompareFolders.exe c:\\folder1 c:\\folder2 [/quite] [/print]\n");
             Console.WriteLine("Для вывода справки используйте ключ /?");
         }
+        
         /// <summary>
         /// Вывод на консоль справочной информации
         /// </summary>
@@ -57,6 +60,17 @@ namespace CompareFolders
             Console.WriteLine(">>Функция копирования уникальных файлов в третью папку");
 
         }
+
+        /// <summary>
+        /// Вывод на консоль сообщения об ошибке если путь не найден
+        /// </summary>
+        public static void PrintFileNotFound()
+        {
+            Console.WriteLine("\nОШИБКА: Путь не найден\n");
+            Console.WriteLine("Пример использования: CompareFolders.exe c:\\folder1 c:\\folder2 [/quite] [/print]\n");
+            Console.WriteLine("Для вывода справки используйте ключ /?");
+        }
+
         /// <summary>
         /// Получение текущей версии сборки
         /// </summary>

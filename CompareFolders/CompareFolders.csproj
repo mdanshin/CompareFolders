@@ -43,6 +43,7 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Compare.cs" />
     <Compile Include="CompareFolders.cs" />
     <Compile Include="FileEntity.cs" />
     <Compile Include="FilesTables.cs" />
