@@ -37,6 +37,8 @@ namespace CompareFolders
             var watch = new Stopwatch();
             watch.Start();
 
+            FilesTables fileTable = new FilesTables(args[0]);
+
             //Получаем список файлов из директории a1 и добавляем их в таблицу
             foreach (var file in GetFiles(args[0]))
             {

@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Dynamic;
 using System.IO;
-using System.Linq;
 using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CompareFolders
 {
@@ -16,7 +11,7 @@ namespace CompareFolders
         private List<FileEntity> FilesHashList { get; set; }
         private List<FileEntity> FilesSkipedList { get; set; }
 
-        FilesTables(string path)
+        public FilesTables(string path)
         {
             Path = path;
         }
@@ -26,9 +21,9 @@ namespace CompareFolders
             var files = Directory.GetFiles(Path);
         }
 
-        public List<FileEntity> GetFilesHashList(string path)
+        public List<FileEntity> GetFilesHashList()
         {
-            FillTables(path);
+            FillTables(Path);
             return FilesHashList;
         }
 
