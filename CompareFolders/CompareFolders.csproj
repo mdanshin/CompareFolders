@@ -43,10 +43,9 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Compare.cs" />
     <Compile Include="CompareFolders.cs" />
     <Compile Include="FileEntity.cs" />
-    <Compile Include="FilesTables.cs" />
+    <Compile Include="HashFilesTables.cs" />
     <Compile Include="ILog.cs" />
     <Compile Include="Printer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
